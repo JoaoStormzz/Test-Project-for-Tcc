@@ -1,0 +1,261 @@
+/* Importa a fonte Poppins do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Define a imagem de fundo do corpo da página */
+body {
+    background-image: url('images/background1.png');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contêiner para aplicar o efeito de desfoque */
+.blurred-background {
+    position: relative;
+}
+
+/* Aplica o desfoque ao fundo usando um pseudo-elemento */
+.blurred-background::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px);
+    z-index: 1;
+}
+
+/* Estilos para o overlay de carregamento */
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Escurece o fundo */
+    color: #fff;
+    display: none; /* Inicialmente escondido */
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    z-index: 9999; /* Garante que está sobre outros conteúdos */
+}
+
+/* Estilo do spinner */
+.spinner {
+    border: 16px solid #f3f3f3; /* Cor de fundo da borda */
+    border-top: 16px solid green; /* Cor da borda do spinner */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Estilos dos ícones */
+.icone {
+    width: 50px;
+    height: auto;
+    border-radius: 30px;
+    object-fit: cover;
+}
+
+/* Centraliza o formulário na tela */
+.form {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Estilos gerais do formulário */
+.formulario {
+    width: 500px;
+    max-width: 500px;
+    background: white;
+    border-radius: 5%;
+    box-shadow: 1px 1px 25px green;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Alinha o texto ao centro e adiciona preenchimento */
+.text-center {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Estilo do texto para "não tem conta" */
+.no-account-text {
+    color: black;
+}
+
+/* Estilos dos links de texto com efeito de transição */
+.text-link {
+    color: black;
+    transition: color 0.2s ease;
+    cursor: pointer;
+}
+
+.text-link:hover {
+    color: green;
+}
+
+/* Oculta elementos */
+.hidden {
+    display: none;
+}
+
+/* Estilos do botão de login */
+.login-button {
+    background-color: green;
+    border-radius: 8px;
+    border-style: none;
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    height: 50px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    user-select: none;
+    align-self: center;
+    margin-top: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Centraliza os formulários de login e registro */
+#loginForm,
+#signupForm {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+/* Estilos do cabeçalho da página */
+.page-header {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    color: #fff;
+    text-align: center;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0 10px;
+    transition: height 0.3s ease-in-out;
+}
+
+.icone {
+    width: fit-content;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    height: 150px;
+    padding-top: 5px;
+}
+
+.icone:hover {
+    filter: hue-rotate(270deg); 
+}
+
+/* Layout dos botões do cabeçalho */
+.header-buttons {
+    display: flex;
+    gap: 15px;
+    padding: 40px;
+}
+
+/* Estilo dos links nos botões do cabeçalho */
+.header-buttons a {
+    text-decoration: none;
+    color: green;
+    font-weight: 500;
+}
+
+.header-buttons a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para textos grandes */
+.tl {
+    font-size: x-large;
+    align-self: center;
+    color: black;
+}
+
+/* Estilos dos inputs */
+.is {
+    width: 100%;
+    max-width: 400px;
+    height: 25px;
+    align-self: center;
+    outline: none;
+    border-radius: 10px;
+    border: 2px solid green;
+    background: transparent;
+}
+
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    display: none; /* Inicialmente escondido */
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    z-index: 9999; /* Garante que está sobre outros conteúdos */
+}
+
+/* Estilos específicos para layouts menores */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .header-buttons {
+        padding: 10px;
+        justify-content: center;
+    }
+
+    .login-button,
+    .is {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+.content-login {
+    width: 100%;
+    height: 100%;
+    background-color: green;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.main-content{
+    padding: 160px 0 0;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+}
