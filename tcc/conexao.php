@@ -12,7 +12,3 @@ if ($con->connect_error) {
     echo "<p>" . $con->connect_errno . ":" . $con->connect_error . "</p>";
     die("Erro fatal"); 
 } 
-
-else {
-    echo "<p>Conectado com sucesso!</p>";
-}

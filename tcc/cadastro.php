@@ -1,31 +1,27 @@
 <?php
 include 'conexao.php';
 
-// Verificar se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Verificar se todas as variáveis estão definidas
-    if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['genero'])) {
+    
+    if (isset($_POST['username']) && isset($_POST['password'])) {
         $username = $_POST['username'];
-        $email = $_POST['email'];
         $password = $_POST['password'];
-        $genero = $_POST['genero'];
 
-        // Comando SQL
-        $sql = "INSERT INTO usuarios (username, email, password, genero)
-                VALUES ('$username', '$email', '$password', '$genero')";
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO usuarios (username, password)
+                VALUES ('$username','$hashed_password')";
 
         // Executar consulta
-        $result = $con->query($sql);
-
-        if ($result == false) {
+        if ($con->query($sql) === true) {
+            
+            header('Location: index.php');
+            exit();
+        } else {
             echo "<p>Ocorreu um erro ao inserir no banco de dados</p>";
             echo "<p>" . $con->errno . ": " . $con->error . "</p>";
             die();
         }
-
-        // Após o cadastro bem-sucedido, redirecionar para a página index.php
-        header('Location: index.php');
-        exit(); // Certifique-se de parar o script após o redirecionamento
     } else {
         echo "<p>Erro: todos os campos devem ser preenchidos!</p>";
     }
@@ -33,51 +29,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="images/iconeofc.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="style/cadastro.css" />
-    <title>Cadastro</title>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <link rel="icon" type="image/x-icon" href="images/LogoQuestionPlex.png">
+    <title>Cadastre-se no QuestionPlex</title>
 </head>
 
 <body>
-    <div class="cadastro-container">
-        <h2>Cadastro</h2>
-        <form action="./cadastro.php" method="post">
+    <header>
+        <div class="container" id="myHeader">
+            <div class="logo-title">
+                <a href="index.php"><img src="images/LogoQuestionPlex.png" height="50px" width="50px"></a>
+                <h1>QuestionPlex</h1>
+            </div>
+            <nav>
+                <ul>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="login-form">
+        <h2>Cadastrar</h2>
+
+        <?php if (isset($error_message)): ?>
+            <p style="color:red;"><?php echo $error_message; ?></p>
+        <?php endif; ?>
+
+        <form action="#" method="post">
             <div class="input-group">
                 <label for="username">Usuário</label>
-                <input type="text" id="username" name="username" required />
-            </div>
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required />
+                <input type="text" id="username" name="username" required>
             </div>
             <div class="input-group">
                 <label for="password">Senha</label>
-                <input type="password" id="password" name="password" required />
+                <input type="password" id="password" name="password" required>
             </div>
             <div class="input-group">
-                <label for="confirm_password">Digite a senha novamente</label>
-                <input type="password" id="confirm_password" name="confirm_password" required />
+                <label for="confirm-password">Confirmar Senha</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
             </div>
-            <div class="input-group">
-                <label for="gender">Gênero</label>
-                <select name="genero" class="select-gender">
-                    <option value="m">Homem</option>
-                    <option value="w">Mulher</option>
-                    <option value="o">Outro</option>
-                    <option value="d">Prefiro não informar</option>
-                </select>
-            </div>
-            <button type="submit" class="cadastro-button" href="index.php">Cadastrar</button>
+            <button type="submit" class="login-button">Cadastrar-se</button>
         </form>
-        <div class="login">
+        <div class="cadastrar">
             <a href="login.php" id="login-link">Login</a>
         </div>
     </div>
+
+    <script src="scripts/script.js"></script>
 </body>
 
 </html>

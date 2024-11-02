@@ -1,50 +1,65 @@
 <?php
-include 'conexao.php'; // Arquivo que faz a conexão com o banco de dados
+session_start();
+include 'conexao.php';
 
-// Verificar se o formulário foi enviado
+$error_message = '';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Receber os dados enviados pelo formulário
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        $username = $con->real_escape_string($_POST['username']);
+        $password = $con->real_escape_string($_POST['password']);
 
-    // Proteger contra SQL Injection
-    $username = $con->real_escape_string($username);
-    $password = $con->real_escape_string($password);
+        $sql = "SELECT * FROM usuarios WHERE username = '$username'";
+        $result = $con->query($sql);
 
-    // Consultar o banco de dados para verificar se o usuário existe e se a senha está correta
-    $sql = "SELECT * FROM usuarios WHERE username = '$username' AND password = '$password'";
-    $result = $con->query($sql);
+        if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
 
-    if ($result->num_rows > 0) {
-        // Se o login for bem-sucedido, iniciar uma sessão
-        session_start();
-        $_SESSION['username'] = $username;
-
-        // Redirecionar o usuário para a página principal (index.php)
-        header('Location: index.php');
-        exit();
-    } else {
-        // Se o login falhar, exibir uma mensagem de erro
-        $error_message = "Usuário ou senha incorretos.";
+            if (password_verify($password, $user['password'])) {
+                $_SESSION['username'] = $username;
+                header('Location: index.php');
+                exit();
+            } else {
+                $error_message = "Usuário ou senha incorretos.";
+            }
+        } else {
+            $error_message = "Usuário ou senha incorretos.";
+        }
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="style/login.css">
-    <script src="script/giro.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <link rel="icon" type="image/x-icon" href="images/LogoQuestionPlex.png">
+    <title>Entre no QuestionPlex</title>
 </head>
 
 <body>
-    <div class="login-container">
+    <header>
+        <div class="container" id="myHeader">
+            <div class="logo-title">
+                <a href="index.php"><img src="images/LogoQuestionPlex.png" height="50px" width="50px"></a>
+                <h1>QuestionPlex</h1>
+            </div>
+            <nav>
+                <ul></ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="login-form">
         <h2>Login</h2>
-        <form action="#" method="post">
+
+        <?php if (!empty($error_message)): ?>
+            <p style="color:red;"><?php echo htmlspecialchars($error_message); ?></p>
+        <?php endif; ?>
+
+        <form action="login.php" method="post">
             <div class="input-group">
                 <label for="username">Usuário</label>
                 <input type="text" id="username" name="username" required>
@@ -59,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <a href="cadastro.php" id="cadastrar-link">Cadastro</a>
         </div>
     </div>
-</body>
 
+    <script src="scripts/script.js"></script>
+</body>
 </html>

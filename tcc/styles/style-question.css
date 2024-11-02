@@ -1,0 +1,215 @@
+/* Importação da fonte */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Configuração básica do corpo */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #449b26, darkgreen);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.dark-theme {
+    background-color: darkgreen;
+    background: linear-gradient(to right, darkgreen, #162e0e);
+}
+
+/* Estilo do botão */
+button {
+    font-family: 'Poppins', sans-serif;
+    background-color: rgba(10, 10, 10, 0);
+    color: green;
+    border: 2px solid green;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Estilo ao passar o mouse no botão */
+button:hover {
+    background-color: green;
+    color: white;
+}
+
+/* Estilo do cabeçalho */
+header {
+    background-color: white;
+    color: black;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    box-shadow: 0 2px whitesmoke;
+    transition: box-shadow 1s ease, color 1s ease;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+header.dark-theme {
+    background-color: rgb(10, 10, 10);
+    color: whitesmoke;
+    box-shadow: 0 2px black;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+h1 {
+    margin: 0;
+}
+
+img {
+    display: block;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: green;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo da área de conteúdo principal */
+.main-content {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.main-content.dark-theme {
+    background-color: rgb(10, 10, 10);
+    color: whitesmoke;
+}
+
+/* Estilo dos inputs de texto com comportamento de parágrafo */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    resize: vertical; /* Permite redimensionar o campo verticalmente */
+    white-space: normal; /* Quebra de linha automática */
+    overflow-wrap: break-word; /* Quebra de linha para palavras grandes */
+}
+
+/* Estilo dos botões de rádio com input na frente */
+.input-criar-questao {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre o radio e o input */
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+    width: 20px; /* Aumenta o tamanho do círculo do radio */
+    height: 20px;
+}
+
+/* Estilo do rótulo dos botões de rádio */
+label {
+    font-size: 16px;
+    margin-right: 20px;
+}
+
+/* Estilo do botão de envio */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    background-color: #449b26;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Hover no botão de envio */
+button[type="submit"]:hover {
+    background-color: #367a20;
+}
+
+.alternativas {
+    display: flex;
+    flex-direction: column; /* Faz os radios ficarem em coluna */
+}
+
+.input-criar-questao {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Espaçamento entre cada linha */
+}
+
+textarea {
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    overflow: hidden; /* Para esconder o scroll vertical */
+    resize: none;
+}
+  
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+textarea {
+    width: 100%;
+    height: 20px; /* Ajuste a altura conforme o design desejado */
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* Layout responsivo para telas menores */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .main-content {
+        padding: 20px;
+        margin: 20px 10px;
+    }
+    
+    input[type="text"], button[type="submit"] {
+        width: 100%;
+        font-size: 16px;
+    }
+}
